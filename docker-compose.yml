@@ -1,0 +1,12 @@
+version: '2.4'
+services:
+  factory:
+    build: ./factory
+    privileged: true
+    network_mode: host
+    ports:
+      - 80:80
+    volumes: 
+      - factory:/factory
+volumes:
+  factory:

@@ -1,0 +1,33 @@
+# FROM balenalib/%%BALENA_ARCH%%-ubuntu-golang:1.16   
+
+# WORKDIR /factory
+
+# ENV UDEV=on
+
+# RUN go install github.com/fogleman/primitive@latest
+
+# COPY . /factory/
+
+
+# CMD ["balena-idle"]
+
+FROM balenalib/amd64-ubuntu-golang:1.20-jammy-run
+
+# Set the working directory inside the container
+WORKDIR /factory/ui
+
+COPY ./ui/requirements.txt .
+
+# Download the Go module dependencies
+RUN install_packages python3 python3-pip
+
+RUN pip install Flask bulma 
+# Copy the source code to the container
+
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY ./ui/ .
+
+ENV FLASK_APP=app.py
+
+CMD ["flask", "run", "--host=0.0.0.0", "--port=80"]

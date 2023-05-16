@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+</head>
+<body>
+  <div class="container">
+    <h1 class="title">Uploaded Photos</h1>
+    {% for file in photo_files %}
+      <a href="{{ url_for('static', filename='uploads/' + file) }}" download>{{ file }}</a><br>
+    {% endfor %}
+  </div>
+</body>
+</html>
