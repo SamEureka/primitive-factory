@@ -1,20 +1,13 @@
-# FROM balenalib/%%BALENA_ARCH%%-ubuntu-golang:1.16   
+## Dockerfile.template
+## Sam Dennon // 17MAY2023
 
-# WORKDIR /factory
-
-# ENV UDEV=on
-
-# RUN go install github.com/fogleman/primitive@latest
-
-# COPY . /factory/
-
-
-# CMD ["balena-idle"]
 
 FROM balenalib/amd64-ubuntu-golang:1.20-jammy-run
 
 # Set the working directory inside the container
 WORKDIR /factory/ui
+
+RUN go install github.com/fogleman/primitive@latest
 
 COPY ./ui/requirements.txt .
 
@@ -27,6 +20,8 @@ RUN pip install Flask bulma
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY ./ui/ .
+
+RUN mkdir -p /factory/ui/static/uploads
 
 ENV FLASK_APP=app.py
 
