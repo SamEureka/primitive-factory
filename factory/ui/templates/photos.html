@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Uploaded Photos</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.2/css/bulma.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">Uploaded Photos</h1>
+
+        <div class="columns is-multiline">
+            {% for card in cards %}
+            <div class="column is-one-quarter">
+                <div class="card">
+                    <div class="card-image">
+                        <figure class="image">
+                            <img src="{{ card.image_path }}" alt="Uploaded Image">
+                        </figure>
+                    </div>
+                    <div class="card-content">
+                        <div class="media">
+                            <div class="media-content">
+                              <img src="{{ url_for('static', filename=card.image_path) }}" alt="Uploaded Image">
+                            </div>
+                        </div>
+                        <div class="content">
+                          <a href="{{ url_for('static', filename=card.image_path) }}" download>Download</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
